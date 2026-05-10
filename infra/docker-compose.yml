@@ -1,0 +1,8 @@
+services:
+  apache:
+    image: php:apache
+    ports:
+      - 8080:80
+    volumes:
+      - ../transparencia/:/var/www/html
+
