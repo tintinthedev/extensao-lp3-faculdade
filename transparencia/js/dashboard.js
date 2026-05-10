@@ -548,11 +548,75 @@ function setupUserWay() {
     })(document);
 }
 
+// Função para configurar o dropdown de busca
+function setupSearchDropdown() {
+    const searchInput = document.getElementById('searchInput');
+    const searchDropdown = document.getElementById('searchDropdown');
+
+    searchInput.addEventListener('input', function() {
+        const query = this.value.trim().toLowerCase();
+
+        if (query === '') {
+            searchDropdown.classList.remove('show');
+            return;
+        }
+
+        const results = [];
+
+        menuItems.forEach(item => {
+            const parentMatch = item.title.toLowerCase().includes(query);
+            item.submenus.forEach(submenu => {
+                const submenuMatch = submenu.toLowerCase().includes(query);
+                if (parentMatch || submenuMatch) {
+                    results.push({
+                        item: item,
+                        submenu: submenu
+                    });
+                }
+            });
+        });
+
+        if (results.length === 0) {
+            searchDropdown.innerHTML = '<div class="search-no-results">Nenhum resultado encontrado</div>';
+        } else {
+            searchDropdown.innerHTML = results.map(result => `
+                <a href="#" data-module="${result.item.module || result.item.title.toLowerCase()}" data-submenu="${result.submenu}">
+                    <div class="dropdown-parent">${result.item.title}</div>
+                    <div class="dropdown-submenu">${result.submenu}</div>
+                </a>
+            `).join('');
+        }
+
+        searchDropdown.classList.add('show');
+    });
+
+    searchDropdown.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (link) {
+            e.preventDefault();
+            const module = link.getAttribute('data-module');
+            const submenu = link.getAttribute('data-submenu');
+            if (module && submenu) {
+                loadModule(module, submenu);
+                searchInput.value = '';
+                searchDropdown.classList.remove('show');
+            }
+        }
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+            searchDropdown.classList.remove('show');
+        }
+    });
+}
+
 // Inicializar o dashboard quando a página carregar
 document.addEventListener('DOMContentLoaded', function() {
     generateSidebarMenu();
     generateCards();
     setupSidebarToggle();
+    setupSearchDropdown();
     setupUserWay(); // Inicializa o UserWay
     handleRouting();
 });
