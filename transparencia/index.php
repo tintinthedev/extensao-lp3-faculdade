@@ -35,8 +35,9 @@
             </div>
             <div class="header-actions">
                 <div class="search-bar">
-                    <input type="text" placeholder="Pesquisar informações...">
+                    <input type="text" id="searchInput" placeholder="Pesquisar informações...">
                     <button><i class="fas fa-search"></i></button>
+                    <div id="searchDropdown" class="search-dropdown"></div>
                 </div>
                 <div class="user-menu">
                     <div class="user-avatar">US</div>
