@@ -74,6 +74,7 @@
                 <div class="footer-section">
                     <h3>Links Rápidos</h3>
                     <ul>
+                        <li><a href="../mapa/mapa.php"><i class="fas fa-sitemap"></i> Mapa do Site</a></li>
                         <li><a href="#">Lei de Acesso à Informação</a></li>
                         <li><a href="#">Portal da Transparência Federal</a></li>
                         <li><a href="#">Tribunal de Contas</a></li>
