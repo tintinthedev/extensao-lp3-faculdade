@@ -140,7 +140,7 @@ function loadModule(moduleName, submenu = null, pushState = true) {
     
     // Atualizar a URL se necessário
 if (pushState) {
-    let newPath = '/transparencia/';
+    let newPath = "../";
 
     if (submenu === 'RGF') newPath += 'rgf';
     else if (moduleName === 'contratos' && submenu === 'Relação de contratos') newPath += 'contratos';
@@ -645,12 +645,22 @@ function setupSearchDropdown() {
 
 // Inicializar o dashboard quando a página carregar
 document.addEventListener('DOMContentLoaded', function() {
-    generateSidebarMenu();
-    generateCards();
-    setupSidebarToggle();
-    setupSearchDropdown();
+    if (document.getElementById("sidebarMenu")) {
+      generateSidebarMenu();
+    }
+    if (document.getElementById("cardsContainer")) {
+      generateCards();
+    }
+    if (document.getElementById("toggleSidebar")) {
+      setupSidebarToggle();
+    }
+    if (document.getElementById("searchInput")) {
+      setupSearchDropdown();
+    }
     setupUserWay(); // Inicializa o UserWay
-    handleRouting();
+    if (document.getElementById("workspace")) {
+      handleRouting();
+    }
 });
 
 // Lidar com os botões de voltar/avançar do navegador
