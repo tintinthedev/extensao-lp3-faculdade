@@ -1,0 +1,164 @@
+:root {
+    color-scheme: light;
+    color: #102a43;
+    background-color: #f5f7fa;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 2rem 1rem;
+    background: #f5f7fa;
+    color: #102a43;
+}
+
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 18px 50px rgba(16, 42, 67, 0.08);
+}
+
+h1 {
+    margin-bottom: 1rem;
+    font-size: clamp(2rem, 2.3vw, 2.7rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 80px;
+    height: 4px;
+    background: #1864ab;
+    border-radius: 4px;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.35rem;
+    color: #ffffff;
+    padding: 1rem 1.25rem;
+    background-color: #1864ab;
+}
+
+.grupo-competencias {
+    margin-bottom: 2.25rem;
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(16, 42, 67, 0.08);
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.grupo-competencias h2 {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    font-size: 1.4rem;
+    color: #ffffff;
+    background-color: #1864ab;
+}
+
+.grupo-competencias .cargo {
+    margin: 0 1.5rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid #e0e6ed;
+}
+
+.grupo-competencias .cargo:last-child {
+    border-bottom: none;
+}
+
+.cargo {
+    background: transparent;
+    border-left: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 0;
+    transition: none;
+    border-bottom: none;
+}
+
+.cargo p:first-child {
+    font-size: 1.06rem;
+    font-weight: 600;
+}
+
+.cargo p strong {
+    color: #102a43;
+    font-weight: 700;
+}
+
+.cargo:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.cargo p {
+    margin: 0.75rem 0;
+    line-height: 1.7;
+    font-size: 0.98rem;
+    color: #334e68;
+}
+
+.cargo p:first-child {
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin-bottom: 0.45rem;
+}
+
+.cargo p strong {
+    color: #102a43;
+    font-weight: 700;
+}
+
+.cargo p {
+    margin: 0.75rem 0;
+    line-height: 1.7;
+    font-size: 0.98rem;
+    color: #334e68;
+}
+
+.cargo p strong {
+    color: #102a43;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .cargo {
+        padding: 1rem;
+    }
+
+    .cargo p {
+        font-size: 0.95rem;
+    }
+}

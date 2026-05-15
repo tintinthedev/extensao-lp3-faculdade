@@ -139,19 +139,24 @@ function loadModule(moduleName, submenu = null, pushState = true) {
     `;
     
     // Atualizar a URL se necessário
-    if (pushState) {
-        let newPath = '/transparencia/';
-        if (submenu === 'RGF') newPath += 'rgf';
-        else if (moduleName === 'contratos' && submenu === 'Relação de contratos') newPath += 'contratos';
-        else if (moduleName === 'contratos' && submenu === 'Fiscais de contratos') newPath += 'fiscais-contratos';
-        else if (moduleName === 'contratos' && submenu === 'Ordem cronológica') newPath += 'ordem-cronologica';
-        else if (moduleName === 'acessibilidade') newPath += 'acessibilidade';
-        else if (moduleName === 'informações institucionais' && submenu === 'Estrutura organizacional') newPath += 'estrutura-organizacional';
-        
-        if (newPath !== window.location.pathname) {
-            history.pushState({ module: moduleName, submenu: submenu }, "", newPath);
-        }
+if (pushState) {
+    let basePath = window.location.pathname.split('/transparencia')[0];
+    let newPath = basePath + '/transparencia/';
+
+    if (submenu === 'RGF') newPath += 'rgf';
+    else if (moduleName === 'contratos' && submenu === 'Relação de contratos') newPath += 'contratos';
+    else if (moduleName === 'contratos' && submenu === 'Fiscais de contratos') newPath += 'fiscais-contratos';
+    else if (moduleName === 'contratos' && submenu === 'Ordem cronológica') newPath += 'ordem-cronologica';
+    else if (moduleName === 'acessibilidade') newPath += 'acessibilidade';
+    else if (moduleName === 'informações institucionais' && submenu === 'Estrutura organizacional') newPath += 'estrutura-organizacional';
+    else if (moduleName === 'informações institucionais' && submenu === 'Competências') newPath += 'competencias';
+
+    if (newPath !== window.location.pathname) {
+        history.pushState({ module: moduleName, submenu: submenu }, "", newPath);
     }
+}
+
+
 
     // Simular carregamento do módulo
     setTimeout(() => {
@@ -170,10 +175,14 @@ function loadModule(moduleName, submenu = null, pushState = true) {
             case 'informações institucionais':
                 if (submenu === 'Estrutura organizacional') {
                     loadEstruturaModule(moduleName, submenu);
+    
+                } else if (submenu === 'Competências') {
+                    loadCompetenciasModule(moduleName, submenu); // 🔥 AQUI
+
                 } else {
                     loadDefaultModule(moduleName, submenu);
                 }
-                break;
+                break;    
             case 'planejamento':
                 if (submenu === 'RGF') {
                     loadRGFModule(moduleName, submenu);
@@ -243,6 +252,26 @@ function loadEstruturaModule(moduleName, submenu) {
                     style="width: 100%; min-height: 800px; border: none; border-radius: 8px;"
                     onload="this.style.height = (this.contentWindow.document.body.scrollHeight + 50) + 'px';">
             </iframe>
+        </div>
+    `;
+}
+
+// Função para carregar o módulo de competências
+function loadCompetenciasModule(moduleName, submenu) {
+    const workspace = document.getElementById('workspace');
+    const basePath = window.location.origin + window.location.pathname.split('/transparencia')[0] + '/transparencia/';
+    
+    workspace.innerHTML = `
+        ${getBreadcrumbsHTML(moduleName, submenu)}
+        <div class="module-header">
+            <h2><i class="fas fa-sitemap"></i> Competências</h2>
+            <p>Competências institucionais baseadas na Cartilha PNTP 2026, esta seção apresenta as competências essenciais do Portal de Transparência Pública Municipal.</p>
+        </div>
+        <div class="module-content">
+        <iframe src="${basePath}competencias/competencias.php"
+            style="width: 100%; min-height: 800px; border: none; border-radius: 8px;"
+            onload="this.style.height = (this.contentWindow.document.body.scrollHeight + 50) + 'px';">
+        </iframe>
         </div>
     `;
 }
@@ -525,7 +554,10 @@ function handleRouting() {
     } else if (path === 'contratos') {
         loadModule('contratos', 'Relação de contratos', false);
         setActiveMenuItemByTitle('Contratos');
-    } else {
+    } else if (path === 'competencias') {
+    loadModule('informações institucionais', 'Competências', false);
+    setActiveMenuItemByTitle('Informações Institucionais');
+}    else {
         loadDashboard(false);
     }
 }
