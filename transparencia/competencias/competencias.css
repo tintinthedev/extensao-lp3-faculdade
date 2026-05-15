@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 :root {
     color-scheme: light;
     color: #102a43;
@@ -162,33 +161,4 @@ h2 {
     .cargo p {
         font-size: 0.95rem;
     }
-=======
-/* ===== COMPETÊNCIAS ===== */
-
-.cards-grid.competencias {
-    gap: 2rem; /* mais espaço entre os cards */
-    padding: 1rem;
-}
-
-.card.competencia {
-    height: auto; /* ajusta ao conteúdo */
-    align-items: flex-start;
-    text-align: left;
-    padding: 1.5rem;
-    border-left: 4px solid var(--primary-color); /* destaque lateral */
-}
-
-.card.competencia .card-title {
-    color: var(--primary-color); /* azul forte */
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-}
-
-.card.competencia .card-submenu p {
-    color: #1e293b; /* contraste escuro */
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 0;
->>>>>>> 252441db1d7cdfba450a5fde7718bb9b0e53d895
 }
