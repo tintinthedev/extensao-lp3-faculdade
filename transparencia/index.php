@@ -89,6 +89,12 @@
                     </ul>
                 </div>
             </div>
+            <div class="footer-radar">
+                <a href="https://radardatransparencia.atricon.org.br/" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/logo-radar.png" alt="Radar da Transparência" style="height: 150px;">
+                    <span>Radar da Transparência</span>
+                </a>
+            </div>
             <div class="copyright">
                 &copy; 2023 Prefeitura Municipal. Todos os direitos reservados.
             </div>

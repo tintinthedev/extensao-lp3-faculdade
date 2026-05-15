@@ -153,6 +153,26 @@ if (pushState) {
 
     if (newPath !== window.location.pathname) {
         history.pushState({ module: moduleName, submenu: submenu }, "", newPath);
+<<<<<<< HEAD
+=======
+=======
+    if (pushState) {
+        let newPath = "../";
+
+        if (submenu === 'RGF') newPath += 'rgf';
+        else if (moduleName === 'contratos' && submenu === 'Relação de contratos') newPath += 'contratos';
+        else if (moduleName === 'contratos' && submenu === 'Fiscais de contratos') newPath += 'fiscais-contratos';
+        else if (moduleName === 'contratos' && submenu === 'Ordem cronológica') newPath += 'ordem-cronologica';
+        else if (moduleName === 'acessibilidade') newPath += 'acessibilidade';
+        else if (moduleName === 'informações institucionais' && submenu === 'Estrutura organizacional') newPath += 'estrutura-organizacional';
+        else if (moduleName === 'informações institucionais' && submenu === 'Competências') newPath += 'competencias';
+        else if (moduleName === 'informações prioritárias' && submenu === 'Perguntas frequentes (FAQ)') newPath += 'perguntas-frequentes';
+
+        if (newPath !== window.location.pathname) {
+            history.pushState({ module: moduleName, submenu: submenu }, "", newPath);
+        }
+>>>>>>> 252441db1d7cdfba450a5fde7718bb9b0e53d895
+>>>>>>> 0c0ad61946f081b190867e72c9da4869acb99e75
     }
 }
 
@@ -179,6 +199,22 @@ if (pushState) {
                 } else if (submenu === 'Competências') {
                     loadCompetenciasModule(moduleName, submenu); // 🔥 AQUI
 
+<<<<<<< HEAD
+=======
+=======
+
+                } else if (submenu === 'Competências') {
+                    loadCompetenciasModule(moduleName, submenu); // 🔥 AQUI
+
+                } else {
+                    loadDefaultModule(moduleName, submenu);
+                }
+                break;
+            case 'informações prioritárias':
+                if (submenu === 'Perguntas frequentes (FAQ)') {
+                    loadFAQModule(moduleName, submenu);
+>>>>>>> 252441db1d7cdfba450a5fde7718bb9b0e53d895
+>>>>>>> 0c0ad61946f081b190867e72c9da4869acb99e75
                 } else {
                     loadDefaultModule(moduleName, submenu);
                 }
@@ -276,6 +312,31 @@ function loadCompetenciasModule(moduleName, submenu) {
     `;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+// Função para carregar o módulo de Perguntas Frequentes (FAQ)
+function loadFAQModule(moduleName, submenu) {
+    const workspace = document.getElementById('workspace');
+
+    workspace.innerHTML = `
+        ${getBreadcrumbsHTML(moduleName, submenu)}
+        <div class="module-header">
+            <h2><i class="fas fa-question-circle"></i> Perguntas Frequentes</h2>
+            <p>Encontre respostas para as dúvidas mais comuns sobre o Portal da Transparência</p>
+        </div>
+        <div class="module-content">
+            <iframe src="./faq/faq.php" 
+                    style="width: 100%; min-height: 800px; border: none; border-radius: 8px;"
+                    onload="this.style.height = (this.contentWindow.document.body.scrollHeight + 50) + 'px';">
+            </iframe>
+        </div>
+    `;
+}
+
+>>>>>>> 252441db1d7cdfba450a5fde7718bb9b0e53d895
+>>>>>>> 0c0ad61946f081b190867e72c9da4869acb99e75
 // Função para carregar o módulo de fiscais de contratos
 function loadFiscaisContratosModule(moduleName, submenu) {
     const workspace = document.getElementById('workspace');
@@ -558,6 +619,15 @@ function handleRouting() {
     loadModule('informações institucionais', 'Competências', false);
     setActiveMenuItemByTitle('Informações Institucionais');
 }    else {
+<<<<<<< HEAD
+=======
+=======
+    } else if (path === 'perguntas-frequentes') {
+        loadModule('informações prioritárias', 'Perguntas frequentes (FAQ)', false);
+        setActiveMenuItemByTitle('Informações Prioritárias');
+    } else {
+>>>>>>> 252441db1d7cdfba450a5fde7718bb9b0e53d895
+>>>>>>> 0c0ad61946f081b190867e72c9da4869acb99e75
         loadDashboard(false);
     }
 }
