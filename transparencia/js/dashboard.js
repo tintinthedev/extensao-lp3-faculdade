@@ -149,7 +149,7 @@ function loadModule(moduleName, submenu = null, pushState = true) {
         else if (moduleName === 'acessibilidade') newPath += 'acessibilidade';
         else if (moduleName === 'informações institucionais' && submenu === 'Estrutura organizacional') newPath += 'estrutura-organizacional';
         else if (moduleName === 'informações institucionais' && submenu === 'Competências') newPath += 'competencias';
-        else if (moduleName === 'informações prioritárias' && submenu === 'Perguntas Frequentes') newPath += 'perguntas-frequentes';
+        else if (moduleName === 'informações prioritárias' && submenu === 'Perguntas frequentes (FAQ)') newPath += 'perguntas-frequentes';
 
         if (newPath !== window.location.pathname) {
             history.pushState({ module: moduleName, submenu: submenu }, "", newPath);
@@ -184,7 +184,7 @@ function loadModule(moduleName, submenu = null, pushState = true) {
                 }
                 break;
             case 'informações prioritárias':
-                if (submenu === 'Perguntas Frequentes') {
+                if (submenu === 'Perguntas frequentes (FAQ)') {
                     loadFAQModule(moduleName, submenu);
                 } else {
                     loadDefaultModule(moduleName, submenu);
@@ -293,7 +293,7 @@ function loadFAQModule(moduleName, submenu) {
             <p>Encontre respostas para as dúvidas mais comuns sobre o Portal da Transparência</p>
         </div>
         <div class="module-content">
-            <iframe src="faq/faq.php" 
+            <iframe src="./faq/faq.php" 
                     style="width: 100%; min-height: 800px; border: none; border-radius: 8px;"
                     onload="this.style.height = (this.contentWindow.document.body.scrollHeight + 50) + 'px';">
             </iframe>
@@ -580,7 +580,7 @@ function handleRouting() {
         loadModule('contratos', 'Relação de contratos', false);
         setActiveMenuItemByTitle('Contratos');
     } else if (path === 'perguntas-frequentes') {
-        loadModule('informações prioritárias', 'Perguntas Frequentes', false);
+        loadModule('informações prioritárias', 'Perguntas frequentes (FAQ)', false);
         setActiveMenuItemByTitle('Informações Prioritárias');
     } else {
         loadDashboard(false);
