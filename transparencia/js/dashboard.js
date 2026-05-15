@@ -4,7 +4,7 @@ const menuItems = [
         id: 1,
         title: "Informações Prioritárias",
         icon: "fas fa-star",
-        submenus: ["Informações essenciais", "Dados críticos", "Indicadores principais"]
+        submenus: ["Informações essenciais", "Dados críticos", "Indicadores principais", "Perguntas frequentes (FAQ)"]
     },
     {
         id: 2,
@@ -121,13 +121,13 @@ const menuItems = [
         title: "Atividades Finalísticas",
         icon: "fas fa-tasks",
         submenus: ["Poder Legislativo", "Composição da Casa", "Leis e atos infralegais"]
-    }
+    },
 ];
 
 // Função para carregar módulo na área de trabalho
 function loadModule(moduleName, submenu = null, pushState = true) {
     const workspace = document.getElementById('workspace');
-    
+
     // Mostrar loading
     workspace.innerHTML = `
         <div class="loading-container" style="display: flex; justify-content: center; align-items: center; height: 400px;">
@@ -137,25 +137,7 @@ function loadModule(moduleName, submenu = null, pushState = true) {
             </div>
         </div>
     `;
-    
-    // Atualizar a URL se necessário
-if (pushState) {
-    let basePath = window.location.pathname.split('/transparencia')[0];
-    let newPath = basePath + '/transparencia/';
 
-    if (submenu === 'RGF') newPath += 'rgf';
-    else if (moduleName === 'contratos' && submenu === 'Relação de contratos') newPath += 'contratos';
-    else if (moduleName === 'contratos' && submenu === 'Fiscais de contratos') newPath += 'fiscais-contratos';
-    else if (moduleName === 'contratos' && submenu === 'Ordem cronológica') newPath += 'ordem-cronologica';
-    else if (moduleName === 'acessibilidade') newPath += 'acessibilidade';
-    else if (moduleName === 'informações institucionais' && submenu === 'Estrutura organizacional') newPath += 'estrutura-organizacional';
-    else if (moduleName === 'informações institucionais' && submenu === 'Competências') newPath += 'competencias';
-
-    if (newPath !== window.location.pathname) {
-        history.pushState({ module: moduleName, submenu: submenu }, "", newPath);
-<<<<<<< HEAD
-=======
-=======
     if (pushState) {
         let newPath = "../";
 
@@ -168,19 +150,15 @@ if (pushState) {
         else if (moduleName === 'informações institucionais' && submenu === 'Competências') newPath += 'competencias';
         else if (moduleName === 'informações prioritárias' && submenu === 'Perguntas frequentes (FAQ)') newPath += 'perguntas-frequentes';
 
+
         if (newPath !== window.location.pathname) {
             history.pushState({ module: moduleName, submenu: submenu }, "", newPath);
         }
->>>>>>> 252441db1d7cdfba450a5fde7718bb9b0e53d895
->>>>>>> 0c0ad61946f081b190867e72c9da4869acb99e75
     }
-}
-
-
 
     // Simular carregamento do módulo
     setTimeout(() => {
-        switch(moduleName) {
+        switch (moduleName) {
             case 'contratos':
                 if (submenu === 'Relação de contratos') {
                     loadContratosModule(moduleName, submenu);
@@ -195,30 +173,18 @@ if (pushState) {
             case 'informações institucionais':
                 if (submenu === 'Estrutura organizacional') {
                     loadEstruturaModule(moduleName, submenu);
-    
-                } else if (submenu === 'Competências') {
-                    loadCompetenciasModule(moduleName, submenu); // 🔥 AQUI
-
-<<<<<<< HEAD
-=======
-=======
 
                 } else if (submenu === 'Competências') {
-                    loadCompetenciasModule(moduleName, submenu); // 🔥 AQUI
-
-                } else {
-                    loadDefaultModule(moduleName, submenu);
+                    loadCompetenciasModule(moduleName, submenu);
                 }
                 break;
             case 'informações prioritárias':
                 if (submenu === 'Perguntas frequentes (FAQ)') {
                     loadFAQModule(moduleName, submenu);
->>>>>>> 252441db1d7cdfba450a5fde7718bb9b0e53d895
->>>>>>> 0c0ad61946f081b190867e72c9da4869acb99e75
                 } else {
                     loadDefaultModule(moduleName, submenu);
                 }
-                break;    
+                break;
             case 'planejamento':
                 if (submenu === 'RGF') {
                     loadRGFModule(moduleName, submenu);
@@ -233,13 +199,15 @@ if (pushState) {
                 loadDefaultModule(moduleName, submenu);
         }
     }, 1000);
+
+
 }
 
 // Função auxiliar para gerar Breadcrumbs (Item 13.2)
 function getBreadcrumbsHTML(moduleName, submenu = null) {
     const item = menuItems.find(i => i.module === moduleName || i.title.toLowerCase() === moduleName.toLowerCase());
     const displayTitle = item ? item.title : moduleName;
-    
+
     return `
         <nav class="breadcrumb" aria-label="Trilha de navegação">
             <a href="#" onclick="loadDashboard(); return false;">Início</a>
@@ -256,7 +224,7 @@ function getBreadcrumbsHTML(moduleName, submenu = null) {
 // Função para carregar o módulo de contratos
 function loadContratosModule(moduleName, submenu) {
     const workspace = document.getElementById('workspace');
-    
+
     // Criar iframe para carregar o PHP
     workspace.innerHTML = `
         ${getBreadcrumbsHTML(moduleName, submenu)}
@@ -276,7 +244,7 @@ function loadContratosModule(moduleName, submenu) {
 // Função para carregar o módulo de estrutura organizacional
 function loadEstruturaModule(moduleName, submenu) {
     const workspace = document.getElementById('workspace');
-    
+
     workspace.innerHTML = `
         ${getBreadcrumbsHTML(moduleName, submenu)}
         <div class="module-header">
@@ -295,8 +263,7 @@ function loadEstruturaModule(moduleName, submenu) {
 // Função para carregar o módulo de competências
 function loadCompetenciasModule(moduleName, submenu) {
     const workspace = document.getElementById('workspace');
-    const basePath = window.location.origin + window.location.pathname.split('/transparencia')[0] + '/transparencia/';
-    
+
     workspace.innerHTML = `
         ${getBreadcrumbsHTML(moduleName, submenu)}
         <div class="module-header">
@@ -304,7 +271,7 @@ function loadCompetenciasModule(moduleName, submenu) {
             <p>Competências institucionais baseadas na Cartilha PNTP 2026, esta seção apresenta as competências essenciais do Portal de Transparência Pública Municipal.</p>
         </div>
         <div class="module-content">
-        <iframe src="${basePath}competencias/competencias.php"
+        <iframe src="./competencias/competencias.php"
             style="width: 100%; min-height: 800px; border: none; border-radius: 8px;"
             onload="this.style.height = (this.contentWindow.document.body.scrollHeight + 50) + 'px';">
         </iframe>
@@ -312,10 +279,6 @@ function loadCompetenciasModule(moduleName, submenu) {
     `;
 }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 // Função para carregar o módulo de Perguntas Frequentes (FAQ)
 function loadFAQModule(moduleName, submenu) {
     const workspace = document.getElementById('workspace');
@@ -327,7 +290,7 @@ function loadFAQModule(moduleName, submenu) {
             <p>Encontre respostas para as dúvidas mais comuns sobre o Portal da Transparência</p>
         </div>
         <div class="module-content">
-            <iframe src="./faq/faq.php" 
+            <iframe src="./faq/faq.php"
                     style="width: 100%; min-height: 800px; border: none; border-radius: 8px;"
                     onload="this.style.height = (this.contentWindow.document.body.scrollHeight + 50) + 'px';">
             </iframe>
@@ -335,12 +298,10 @@ function loadFAQModule(moduleName, submenu) {
     `;
 }
 
->>>>>>> 252441db1d7cdfba450a5fde7718bb9b0e53d895
->>>>>>> 0c0ad61946f081b190867e72c9da4869acb99e75
 // Função para carregar o módulo de fiscais de contratos
 function loadFiscaisContratosModule(moduleName, submenu) {
     const workspace = document.getElementById('workspace');
-    
+
     workspace.innerHTML = `
         ${getBreadcrumbsHTML(moduleName, submenu)}
         <div class="module-header">
@@ -359,7 +320,7 @@ function loadFiscaisContratosModule(moduleName, submenu) {
 // Função para carregar o módulo de ordem cronológica
 function loadOrdemCronologicaModule(moduleName, submenu) {
     const workspace = document.getElementById('workspace');
-    
+
     workspace.innerHTML = `
         ${getBreadcrumbsHTML(moduleName, submenu)}
         <div class="module-header">
@@ -378,7 +339,7 @@ function loadOrdemCronologicaModule(moduleName, submenu) {
 // Função para carregar o módulo de RGF
 function loadRGFModule(moduleName, submenu) {
     const workspace = document.getElementById('workspace');
-    
+
     workspace.innerHTML = `
         ${getBreadcrumbsHTML(moduleName, submenu)}
         <div class="module-header">
@@ -398,7 +359,7 @@ function loadRGFModule(moduleName, submenu) {
 function loadDefaultModule(moduleName, submenu = null) {
     const workspace = document.getElementById('workspace');
     const title = submenu || moduleName;
-    
+
     workspace.innerHTML = `
         ${getBreadcrumbsHTML(moduleName, submenu)}
         <div class="module-header">
@@ -429,14 +390,14 @@ function loadDashboard(pushState = true) {
             <!-- Cards serão gerados dinamicamente -->
         </div>
     `;
-    
+
     generateCards();
 }
 
 // Função para gerar o menu lateral
 function generateSidebarMenu() {
     const container = document.getElementById('sidebarMenu');
-    
+
     // Adicionar link para dashboard inicial
     const dashboardItem = document.createElement('div');
     dashboardItem.className = 'menu-item active';
@@ -448,15 +409,15 @@ function generateSidebarMenu() {
             <span class="menu-text">Dashboard Inicial</span>
         </a>
     `;
-    
+
     dashboardItem.querySelector('a').addEventListener('click', function(e) {
         e.preventDefault();
         setActiveMenuItem(this);
         loadDashboard();
     });
-    
+
     container.appendChild(dashboardItem);
-    
+
     // Gerar os itens do menu
     menuItems.forEach(item => {
         const menuItem = document.createElement('div');
@@ -467,8 +428,8 @@ function generateSidebarMenu() {
                     <i class="${item.icon}"></i>
                 </div>
                 <span class="menu-text">${item.title}</span>
-                ${item.submenus && item.submenus.length > 0 ? 
-                    '<span class="menu-arrow"><i class="fas fa-chevron-right"></i></span>' : ''}
+                ${item.submenus && item.submenus.length > 0 ?
+                '<span class="menu-arrow"><i class="fas fa-chevron-right"></i></span>' : ''}
             </a>
             ${item.submenus && item.submenus.length > 0 ? `
                 <div class="submenu">
@@ -480,7 +441,7 @@ function generateSidebarMenu() {
                 </div>
             ` : ''}
         `;
-        
+
         // Adicionar evento de clique para expandir/recolher submenu
         const menuLink = menuItem.querySelector('a');
         if (item.submenus && item.submenus.length > 0) {
@@ -495,7 +456,7 @@ function generateSidebarMenu() {
                 loadModule(item.module || item.title.toLowerCase());
             });
         }
-        
+
         // Adicionar eventos para submenus
         const submenuLinks = menuItem.querySelectorAll('.submenu-item a');
         submenuLinks.forEach(link => {
@@ -507,7 +468,7 @@ function generateSidebarMenu() {
                 loadModule(module, submenu);
             });
         });
-        
+
         container.appendChild(menuItem);
     });
 }
@@ -518,7 +479,7 @@ function setActiveMenuItem(clickedElement) {
     document.querySelectorAll('.menu-item').forEach(item => {
         item.classList.remove('active');
     });
-    
+
     // Adicionar classe active ao item clicado
     const menuItem = clickedElement.closest('.menu-item');
     if (menuItem) {
@@ -530,7 +491,7 @@ function setActiveMenuItem(clickedElement) {
 function generateCards() {
     const container = document.getElementById('cardsContainer');
     container.innerHTML = '';
-    
+
     menuItems.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
@@ -547,7 +508,7 @@ function generateCards() {
                 `).join('')}
             </div>
         `;
-        
+
         // Adicionar evento de clique para o card principal
         card.addEventListener('click', function(e) {
             if (!e.target.classList.contains('submenu-item')) {
@@ -555,7 +516,7 @@ function generateCards() {
                 setActiveMenuItemByTitle(item.title);
             }
         });
-        
+
         // Adicionar eventos para subitens do card
         const submenuItems = card.querySelectorAll('.submenu-item');
         submenuItems.forEach(subItem => {
@@ -567,7 +528,7 @@ function generateCards() {
                 setActiveMenuItemByTitle(item.title);
             });
         });
-        
+
         container.appendChild(card);
     });
 }
@@ -587,7 +548,7 @@ function setActiveMenuItemByTitle(title) {
 function setupSidebarToggle() {
     const toggleBtn = document.getElementById('toggleSidebar');
     const sidebar = document.getElementById('sidebar');
-    
+
     toggleBtn.addEventListener('click', function() {
         sidebar.classList.toggle('collapsed');
     });
@@ -596,7 +557,7 @@ function setupSidebarToggle() {
 // Função para verificar a URL atual e carregar o módulo correspondente
 function handleRouting() {
     const path = window.location.pathname.replace('/transparencia/', '');
-    
+
     if (path === 'rgf') {
         loadModule('planejamento', 'RGF', false);
         setActiveMenuItemByTitle('Planejamento e Prestação de Contas');
@@ -616,18 +577,12 @@ function handleRouting() {
         loadModule('contratos', 'Relação de contratos', false);
         setActiveMenuItemByTitle('Contratos');
     } else if (path === 'competencias') {
-    loadModule('informações institucionais', 'Competências', false);
-    setActiveMenuItemByTitle('Informações Institucionais');
-}    else {
-<<<<<<< HEAD
-=======
-=======
+        loadModule('informações institucionais', 'Competências', false);
+        setActiveMenuItemByTitle('Informações Institucionais');
     } else if (path === 'perguntas-frequentes') {
         loadModule('informações prioritárias', 'Perguntas frequentes (FAQ)', false);
         setActiveMenuItemByTitle('Informações Prioritárias');
     } else {
->>>>>>> 252441db1d7cdfba450a5fde7718bb9b0e53d895
->>>>>>> 0c0ad61946f081b190867e72c9da4869acb99e75
         loadDashboard(false);
     }
 }
